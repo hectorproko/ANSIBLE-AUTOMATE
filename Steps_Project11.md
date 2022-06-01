@@ -33,7 +33,7 @@ Configuring Webhook in GitHub
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/addWebhook.png)  
 
 
-Configured a Post-build step to save all (**) files
+Configured a Post-build step to save all (**) files. Similar to [Project 9](https://github.com/hectorproko/CONTINOUS-INTEGRATION-PIPELINE-FOR-TOOLING-WEBSITE/blob/main/Project9.md#configure-jenkins-to-retrieve-source-codes-from-github-using-webhooks)
 
 We can test the setup by making some change in the README.md file in main branch, build starts automatically and Jenkins saves the files (build artifacts) in the following path
 
@@ -107,7 +107,7 @@ We do a pull request to **merge** NewFeature to Main
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/mergePull.png)  
 
 
-We confirm  
+Confirmation  
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/successfullyMerged.png)  
 
 
@@ -137,24 +137,23 @@ Fast-forward
  create mode 100644 inventory/uat
  create mode 100644 playbooks/common.yml
 hector@hector-Laptop:~/ansible-config-mgt$ ls
-2plays.yml  inventory  playbooks  README.md
+2plays.yml  inventory  playbooks  README.md #all files together
 hector@hector-Laptop:~/ansible-config-mgt$
 ```
 
 
-This is supposed to trigger the build from the webhook, but is not working not just this way but overall when I tested even though it worked before
-Taking this from when it worked before
+This triggers the build from the webhook  
 
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/consoleOutput.png)
 
 
-Install plug in
-
-Ok so in this step we are not yet using the plug in we are just testing by running the command itself  
+**Installing Ansible plugin**  
+In this project I will not use the plugin just yet and will test the playbooks with manual commands  
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/plugin.png)    
     
 
-So I'm testing the running of the playbook with 2plays.yml, and it works, it pings 2 instances 
+Here I'm using **2plays.yml** with **ping** modules just for me to test the inventory/connection of target machines.  
+I have two **EC2** Instances with tag Name: Jenkins_Ansible and NFS which the dynamic inventory interprets as **_Jenkins_Ansible** and **_NFS**
 
 ``` perl
 ubuntu@ip-172-31-94-159:~$ cat 2plays.yml
@@ -184,7 +183,16 @@ ubuntu@ip-172-31-94-159:~$ cat 2plays.yml
       ping:
 ubuntu@ip-172-31-94-159:~$
 ```
-
+I run the playbook  
+No need to specify an inventory because dynamic inventory is set to default.
+``` bash
+ansible-playbook 2plays.yml
+```
+Successful output with 0 fails
+``` perl  
+PLAY RECAP **********************************************************************************************************************************************************************************ec2-3-220-20-204.compute-1.amazonaws.com : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ec2-54-209-253-1.compute-1.amazonaws.com : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+``` 
 
 Ended up doing the as per instructions and run common.yml which installs wireshark on both machines. Again without the ssh agent 
 
