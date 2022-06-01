@@ -20,17 +20,17 @@ I'll create a Jenkins job (project) that will update the contents of the reposit
 
 Creating a new Freestyle project named **ansible** in Jenkins and pointing it to your **ansible-config-mgt** repository.
 
-![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/enterItem.png)    
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/enterItem.png)     
 
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/repositoryURL.png)  
 
 
-Setting  webhook to trigger ansible build.
+Setting  webhook to trigger ansible build.  
 
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/buildTriggers.png)  
 
 Configuring Webhook in GitHub
-![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/addWebhook.png)
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/addWebhook.png)  
 
 
 Configured a Post-build step to save all (**) files, like you did it in Project 9.
@@ -41,7 +41,7 @@ We can test the setup by making some change in the README.md file in main branch
 ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 ```
 
-In the **[ansible-config-mgt](https://github.com/hectorproko/ansible-config-mgt/tree/main)** GitHub repository, create a new branch [NewFeature](https://github.com/hectorproko/ansible-config-mgt/tree/NewFeature) that will be used for development of a new feature.
+In the **[ansible-config-mgt](https://github.com/hectorproko/ansible-config-mgt/tree/main)** GitHub repository, create a new branch [NewFeature](https://github.com/hectorproko/ansible-config-mgt/tree/NewFeature) that will be used for development of a new feature.  
 
 
 I'll checkout the newly created branch in my local machine to build code and directory structure  
