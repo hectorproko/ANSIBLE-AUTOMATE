@@ -33,7 +33,7 @@ Configuring Webhook in GitHub
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/addWebhook.png)  
 
 
-Configured a Post-build step to save all (**) files, like you did it in Project 9.
+Configured a Post-build step to save all (**) files
 
 We can test the setup by making some change in the README.md file in main branch, build starts automatically and Jenkins saves the files (build artifacts) in the following path
 
@@ -101,14 +101,14 @@ inventory  playbooks  README.md
 hector@hector-Laptop:~/ansible-config-mgt$
 ```
 
-We do a pull request
-![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/comparingChanges.png)
+We do a pull request to **merge** NewFeature to Main
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/comparingChanges.png)  
 
-![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/mergePull.png)
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/mergePull.png)  
 
 
-We confirm
-![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/successfullyMerged.png)
+We confirm  
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/successfullyMerged.png)  
 
 
 ``` bash
