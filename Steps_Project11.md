@@ -15,62 +15,72 @@ sudo apt install ansible
 ansible --version #confirm intallation
 ```
 
-Configure Jenkins build job to save your repository content every time you change it – this will solidify your Jenkins configuration skills acquired in Project 9.
 
-Create a new Freestyle project ansible in Jenkins and point it to your ‘ansible-config-mgt’ repository.
+I'll create a Jenkins job (project) that will update the contents of the repository locally each time there is a change in the repo
 
-enterItem.pic
+Creating a new Freestyle project named **ansible** in Jenkins and pointing it to your **ansible-config-mgt** repository.
 
-repositoryURL.png
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/enterItem.png)    
 
-Configure Webhook in GitHub and set webhook to trigger ansible build.
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/repositoryURL.png)  
 
-buildTriggers.png
-addWebhook.png
 
-Configure a Post-build job to save all (**) files, like you did it in Project 9.
+Setting  webhook to trigger ansible build.
 
-Test your setup by making some change in README.MD file in master branch and make sure that builds starts automatically and Jenkins saves the files (build artifacts) in following folder
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/buildTriggers.png)  
+
+Configuring Webhook in GitHub
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/addWebhook.png)
+
+
+Configured a Post-build step to save all (**) files, like you did it in Project 9.
+
+We can test the setup by making some change in the README.md file in main branch, build starts automatically and Jenkins saves the files (build artifacts) in the following path
+
 ``` bash  
 ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 ```
 
-In your **ansible-config-mgt** GitHub repository, create a new branch that will be used for development of a new feature.
-
-Checkout the newly created feature branch to your local machine and start building your code and directory structure
-
-Create a directory and name it **playbooks** – it will be used to store all your playbook files.
-
-Create a directory and name it **inventory** – it will be used to keep your hosts organised.
-
-Within the playbooks folder, create your first playbook, and name it **common.yml**
-
-Within the inventory folder, create an inventory file (.yml) for each environment (Development, Staging Testing and Production) **dev**, **staging**, **uat**, and **prod** respectively.
-
-InventoryPic
-
-Created files envutally will merge to main for Jekinns to use. will either use yml or ini format, will use uat.ini for test
+In the **[ansible-config-mgt](https://github.com/hectorproko/ansible-config-mgt/tree/main)** GitHub repository, create a new branch [NewFeature](https://github.com/hectorproko/ansible-config-mgt/tree/NewFeature) that will be used for development of a new feature.
 
 
-you need to copy your private (.pem) key to your server. Do not forget to change permissions to your private key chmod 400 key.pem, otherwise EC2 will not accept the key. Now you need to import your key into ssh-agent:
-	eval `ssh-agent -s` (need this to start the agent)
-ssh-add <path-to-private-key>
-	Confirm the key has been added with the command below, you should see the name of your key
-	ssh-add -l
-	Now, ssh into your Jenkins-Ansible server using ssh-agent
-	ssh -A ubuntu@public-ip
+I'll checkout the newly created branch in my local machine to build code and directory structure  
+
+Created a directory **playbooks** – used to store all my playbook files.  
+
+Created a directory **inventory** – used to keep your hosts organized.
+
+Within the playbooks folder I will create my first playbook, and name it **common.yml**
+
+Within the inventory folder, created inventory files for each environment (Development, Staging Testing and Production) **dev**, **staging**, **uat**, and **prod** respectively.
+
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/inventory.png)
+
+Above image of created files (inventory).  
+_This manual inventory is a placeholder for now (doesn't even have **.yml** or **.ini** extentions )_
+
+In this project I will be using a [Dynamic Inventory](https://github.com/hectorproko/Ansible/blob/main/Ansible_setup.md) with plugin **aws_ec2.yml**   
+
+Now I import your key into ssh-agent:
+
+
 	
 ``` bash
 ubuntu@ip-172-31-94-159:~$ eval `ssh-agent -s`
-Agent pid 35692
+Agent pid 35692 #agent started
 ubuntu@ip-172-31-94-159:~$ ssh-add /home/ubuntu/daro.io.pem
 Identity added: /home/ubuntu/daro.io.pem (/home/ubuntu/daro.io.pem)
-ubuntu@ip-172-31-94-159:~$ ssh-add -l
+ubuntu@ip-172-31-94-159:~$ ssh-add -l #confirm key was added
 2048 SHA256:wq3aSIyEU9dbylJv50YOhgXXPfcxZT7J5EmRIjLXZeA /home/ubuntu/daro.io.pem (RSA)
+```
+Now I can **ssh** into my Jenkins/Ansible instance without having to specify a **.pem** key
+
+``` bash 
+ssh -A ubuntu@public-ip
 ```
 
 
-Current Files in **Main**
+Current files in **Main**
 
 ``` bash
 hector@hector-Laptop:~/ansible-config-mgt$ git branch
@@ -80,7 +90,7 @@ hector@hector-Laptop:~/ansible-config-mgt$ ls
 hector@hector-Laptop:~/ansible-config-mgt$
 ```
 
-Current Fifles in **NewFeature**
+Current files in **NewFeature**
 
 ``` bash
 hector@hector-Laptop:~/ansible-config-mgt$ git branch
@@ -92,11 +102,14 @@ hector@hector-Laptop:~/ansible-config-mgt$
 ```
 
 We do a pull request
-    comparingChanges.png
-    mergePull.png
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/comparingChanges.png)
+
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/mergePull.png)
+
 
 We confirm
-    successfullyMerged.png
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/successfullyMerged.png)
+
 
 ``` bash
 hector@hector-Laptop:~/ansible-config-mgt$ git checkout main
@@ -132,14 +145,14 @@ hector@hector-Laptop:~/ansible-config-mgt$
 This is supposed to trigger the build from the webhook, but is not working not just this way but overall when I tested even though it worked before
 Taking this from when it worked before
 
-    consoleOutput.png
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/consoleOutput.png)
 
 
 Install plug in
 
-Ok so in this step we are not yet using the plug in we are just testing by running the command itself
-    plugin.png
-
+Ok so in this step we are not yet using the plug in we are just testing by running the command itself  
+![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/plugin.png)    
+    
 
 So I'm testing the running of the playbook with 2plays.yml, and it works, it pings 2 instances 
 
