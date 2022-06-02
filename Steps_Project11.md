@@ -232,8 +232,9 @@ ec2-3-220-20-204.compute-1.amazonaws.com : ok=3    changed=1    unreachable=0   
 ec2-54-209-253-1.compute-1.amazonaws.com : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
 ```
 
-``` bash
+
 Confirming wireshark is installed in NFS server
+``` bash
 [ec2-user@ip-172-31-81-201 ~]$ sudo yum list installed | grep wire
 wireshark.x86_64
 ```
