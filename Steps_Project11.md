@@ -162,7 +162,7 @@ ubuntu@ip-172-31-94-159:~$ cat 2plays.yml
 ---
 - name: update web servers
   hosts: _Jenkins_Ansible
-  remote_user: ubuntu
+  remote_user: ubuntu #Ubuntu
 
   vars_files:
     - /etc/ansible/vars/info.yml
@@ -173,7 +173,7 @@ ubuntu@ip-172-31-94-159:~$ cat 2plays.yml
 
 - name: update db servers
   hosts: _NFS
-  remote_user: ec2-user
+  remote_user: ec2-user #Red Hat
 
   vars_files:
     - /etc/ansible/vars/info.yml
@@ -195,12 +195,43 @@ ec2-3-220-20-204.compute-1.amazonaws.com : ok=2    changed=0    unreachable=0   
 ec2-54-209-253-1.compute-1.amazonaws.com : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ``` 
 
-Ended up doing the as per instructions and run common.yml which installs wireshark on both machines. Again without the ssh agent 
+Now that everything seems good I will install wireshark with **common.yml**
 
 ``` bash
-PLAY RECAP *****************************************************************************************ec2-3-220-20-204.compute-1.amazonaws.com : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-ec2-54-209-253-1.compute-1.amazonaws.com : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+---
+- name: update web servers
+  hosts: _Jenkins_Ansible
+  remote_user: ubuntu
+
+  vars_files:
+    - /etc/ansible/vars/info.yml
+
+  tasks:
+    - name: ensure wireshark is at the latest version
+      apt:
+        name: wireshark
+        state: latest
+
+- name: update db servers
+  hosts: _NFS
+  remote_user: ec2-user
+
+  vars_files:
+    - /etc/ansible/vars/info.yml
+
+  tasks:
+    - name: ensure wireshark is at the latest version
+      yum:
+        name: wireshark
+        state: latest
 ```
+
+``` bash
+PLAY RECAP *********************************************************************************************************************  
+ec2-3-220-20-204.compute-1.amazonaws.com : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+ec2-54-209-253-1.compute-1.amazonaws.com : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+```
+
 ``` bash
 Proving wireshark was installed in NFS server
 [ec2-user@ip-172-31-81-201 ~]$ sudo yum list installed | grep wire
