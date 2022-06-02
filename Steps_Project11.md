@@ -245,3 +245,6 @@ state: absent
 ```
 
 #### Additional Ansible Playbooks
+[Project7](https://github.com/hectorproko/Ansible/tree/main/Project7)  
+[Project8](https://github.com/hectorproko/Ansible/tree/main/Project8)  
+[Project9](https://github.com/hectorproko/Ansible/tree/main/Project9)  
