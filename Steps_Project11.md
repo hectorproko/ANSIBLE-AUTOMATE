@@ -233,9 +233,12 @@ ec2-54-209-253-1.compute-1.amazonaws.com : ok=3    changed=1    unreachable=0   
 ```
 
 ``` bash
-Proving wireshark was installed in NFS server
+Confirming wireshark is installed in NFS server
 [ec2-user@ip-172-31-81-201 ~]$ sudo yum list installed | grep wire
 wireshark.x86_64
 ```
 
-Then I changed the state: absent to remove them
+Then I changed the state to absent to remove them
+``` bash
+state: absent 
+```
