@@ -189,7 +189,7 @@ No need to specify an inventory because dynamic inventory is set to default.
 ansible-playbook 2plays.yml
 ```
 Successful output with 0 fails
-``` perl  
+``` bash   
 PLAY RECAP *********************************************************************************************************************
 ec2-3-220-20-204.compute-1.amazonaws.com : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
 ec2-54-209-253-1.compute-1.amazonaws.com : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
