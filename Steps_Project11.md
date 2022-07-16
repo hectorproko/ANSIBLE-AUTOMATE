@@ -1,8 +1,8 @@
 # ANSIBLE AUTOMATION
-The aim of this project is to start automating tasks with Ansible Configuration Management.
+The aim of this project is to start automating tasks with **Ansible Configuration Management**.
 
 ## INSTALL AND CONFIGURE ANSIBLE ON EC2 INSTANCE
-I will use an already existing EC2 instance with Jenkins Installed
+I will use an already existing **EC2** instance with **Jenkins** Installed
  
 
 In my **GitHub** account I will create a new repository and name it **ansible-config-mgt**
@@ -16,32 +16,31 @@ ansible --version #confirm intallation
 ```
 
 
-I'll create a Jenkins job (project) that will update the contents of the repository locally each time there is a change in the repo
+I'll create a **Jenkins** job *(project)* that will update the contents of the repository locally each time there is a change in the repo
 
-Creating a new Freestyle project named **ansible** in Jenkins and pointing it to your **ansible-config-mgt** repository.
+Creating a new **Freestyle** project named **ansible** in **Jenkins** and pointing it to your **ansible-config-mgt** repository.
 
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/enterItem.png)     
 
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/repositoryURL.png)  
 
 
-Setting  webhook to trigger ansible build.  
+Setting **Webhook** to trigger **ansible** job build.  
 
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/buildTriggers.png)  
 
-Configuring Webhook in GitHub  
+Configuring **Webhook** in **GitHub**  
 ![Markdown Logo](https://raw.githubusercontent.com/hectorproko/ANSIBLE-AUTOMATE/main/images/addWebhook.png)  
 
 
-Configured a Post-build step to save all (**) files. Similar to [Project 9](https://github.com/hectorproko/CONTINOUS-INTEGRATION-PIPELINE-FOR-TOOLING-WEBSITE/blob/main/Project9.md#configure-jenkins-to-retrieve-source-codes-from-github-using-webhooks)
+Configured a **Post-build** step to save all **\(\**)** files. Similar to [Project 9](https://github.com/hectorproko/CONTINOUS-INTEGRATION-PIPELINE-FOR-TOOLING-WEBSITE/blob/main/Project9.md#configure-jenkins-to-retrieve-source-codes-from-github-using-webhooks)
 
-We can test the setup by making some change in the README.md file in main branch, build starts automatically and Jenkins saves the files (build artifacts) in the following path
+We can test the setup by making a change in the **README.md** file in *main branch*, build starts automatically and **Jenkins** saves the files (build artifacts) in the following path
 
-``` bash  
-ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
-```
+`ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/`
 
-In the **[ansible-config-mgt](https://github.com/hectorproko/ansible-config-mgt/tree/main)** GitHub repository, create a new branch [NewFeature](https://github.com/hectorproko/ansible-config-mgt/tree/NewFeature) that will be used for development of a new feature.  
+
+In the **[ansible-config-mgt](https://github.com/hectorproko/ansible-config-mgt/tree/main)** **GitHub** repository, I create a new branch [NewFeature](https://github.com/hectorproko/ansible-config-mgt/tree/NewFeature) that will be used for development of a new feature.  
 
 
 I'll checkout the newly created branch in my local machine to build code and directory structure  
@@ -153,7 +152,7 @@ In this project I will not use the plugin just yet and will test the playbooks w
     
 
 Here I'm using **2plays.yml** with **ping** modules just for me to test the inventory/connection of target machines.  
-I have two **EC2** Instances with tag Name: Jenkins_Ansible and NFS which the dynamic inventory interprets as **_Jenkins_Ansible** and **_NFS**
+I have two **EC2** Instances with tag Name: **Jenkins_Ansible** and **NFS** which the dynamic inventory interprets as **_Jenkins_Ansible** and **_NFS**
 
 ``` perl
 ubuntu@ip-172-31-94-159:~$ cat 2plays.yml
@@ -244,7 +243,7 @@ Then I changed the state to absent to remove them
 state: absent 
 ```
 
-#### Additional Ansible Playbooks
-[Project7](https://github.com/hectorproko/Ansible/tree/main/Project7)  
-[Project8](https://github.com/hectorproko/Ansible/tree/main/Project8)  
-[Project9](https://github.com/hectorproko/Ansible/tree/main/Project9)  
+### Additional Ansible Playbooks
+[Project 7: Devops Tooling Website Solution](https://github.com/hectorproko/Ansible/tree/main/Project7)  
+[Project 8: LOAD BALANCER SOLUTION WITH APACHE](https://github.com/hectorproko/Ansible/tree/main/Project8)  
+[Project 9: CONTINOUS INTEGRATION PIPELINE FOR TOOLING WEBSITE](https://github.com/hectorproko/Ansible/tree/main/Project9)  
